@@ -13,7 +13,7 @@ __attribute__((always_inline))
 inline void
 _set_color(uint8_t value)
 {
-#if RF == A5 and GF == A4 and BF == 5 and RS == 4 and GS == 3 and BS == 2
+#if RF == 2 and GF == 3 and BF == 4 and RS == 5 and GS == 6 and BS == 7
     // set 6 color pins and keep the rx tx pins as are
     // we need to shift two as the reads are optimized for nano and expect the 0 and 1 to be rx/tx
     ((PORTS *)IO_PORT_START)->port[port_from_pin(arduino_pin_to_avr_pin(RF))].PCNTR3.POSR = value;
@@ -63,7 +63,7 @@ _stepRow()
 #else
 // row pin check
 #if PANEL_Y > 32
-#if RA == 11 and RB == 12 and RC == 13 and RD == 10 and RE == 8
+#if RA == A0 and RB == A1 and RC == A2 and RD == A3 and RE == 8
     ((PORTS *)IO_PORT_START)->port[port_from_pin(arduino_pin_to_avr_pin(RA))].PCNTR3.POSR = (PANEL_ROW_VAR & 15) << bit_from_pin(arduino_pin_to_avr_pin(RA));
     ((PORTS *)IO_PORT_START)->port[port_from_pin(arduino_pin_to_avr_pin(RA))].PCNTR3.PORR = ((~PANEL_ROW_VAR) & 15) << bit_from_pin(arduino_pin_to_avr_pin(RA));
     ((PORTS *)IO_PORT_START)->port[port_from_pin(arduino_pin_to_avr_pin(RE))].PCNTR3.POSR = ((PANEL_ROW_VAR >> 4) & 1) << bit_from_pin(arduino_pin_to_avr_pin(RE));
@@ -73,7 +73,7 @@ _stepRow()
 #endif
 #else
 #if PANEL_Y > 16
-#if RA == 11 and RB == 12 and RC == 13 and RD == 10
+#if RA == A0 and RB == A1 and RC == A2 and RD == A3
     ((PORTS *)IO_PORT_START)->port[port_from_pin(arduino_pin_to_avr_pin(RA))].PCNTR3.POSR = PANEL_ROW_VAR << bit_from_pin(arduino_pin_to_avr_pin(RA));
     ((PORTS *)IO_PORT_START)->port[port_from_pin(arduino_pin_to_avr_pin(RA))].PCNTR3.PORR = ((~PANEL_ROW_VAR) & 15) << bit_from_pin(arduino_pin_to_avr_pin(RA));
 #else
@@ -81,7 +81,7 @@ _stepRow()
 #endif
 #else
 #if PANEL_Y > 8
-#if RA == 11 and RB == 12 and RC == 13
+#if RA == A0 and RB == A1 and RC == A2
     ((PORTS *)IO_PORT_START)->port[port_from_pin(arduino_pin_to_avr_pin(RA))].PCNTR3.POSR = PANEL_ROW_VAR << bit_from_pin(arduino_pin_to_avr_pin(RA));
     ((PORTS *)IO_PORT_START)->port[port_from_pin(arduino_pin_to_avr_pin(RA))].PCNTR3.PORR = ((~PANEL_ROW_VAR) & 7) << bit_from_pin(arduino_pin_to_avr_pin(RA));
 #else
@@ -89,7 +89,7 @@ _stepRow()
 #endif
 #else
 #if PANEL_Y > 4
-#if RA == 11 and RB == 12
+#if RA == A0 and RB == A1
     ((PORTS *)IO_PORT_START)->port[port_from_pin(arduino_pin_to_avr_pin(RA))].PCNTR3.POSR = PANEL_ROW_VAR << bit_from_pin(arduino_pin_to_avr_pin(RA));
     ((PORTS *)IO_PORT_START)->port[port_from_pin(arduino_pin_to_avr_pin(RA))].PCNTR3.PORR = ((~PANEL_ROW_VAR) & 3) << bit_from_pin(arduino_pin_to_avr_pin(RA));
 #else
